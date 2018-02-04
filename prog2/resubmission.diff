@@ -1,0 +1,180 @@
+commit 5ed0fd054aee0958144fcf6e19114ee9e74cb181
+Author: Savan Kiran <savankiran@cs.arizona.edu>
+Date:   Fri Nov 11 22:07:56 2016 -0700
+
+    Resubmission fixes
+
+diff --git a/MPI_Task_Graph.c b/MPI_Task_Graph.c
+index 157dcf9..a234524 100644
+--- a/MPI_Task_Graph.c
++++ b/MPI_Task_Graph.c
+@@ -186,16 +186,13 @@ void cross_sweep(int rank) {
+   while(i<rank_collective_index[rank]) {
+     VertexParcelable *v = &rank_vertices[rank][i];
+     if(is_blocking_op(v)) {
+-      char mpi_op_str[50];
+-      get_MPI_op_string(v->mpi_op, mpi_op_str);
+-
+       // Find mathcing MPI_Send (or) MPI_Isend
+       int sender_rank = v->receive_from;
+       int j=rank_send_index[sender_rank];
+       while(j<graph_curr_insertion_pos) {
+ 	VertexParcelable *sender_v = graph[j].v;
+         if((sender_v->mpi_op==MPI_op_Send || sender_v->mpi_op==MPI_op_Isend) 
+-	   && sender_v->send_to == rank && sender_v->tag == v->tag) {
++	   && sender_v->send_to == rank && sender_v->tag == v->tag && sender_v->rank == sender_rank) {
+ 	  // found a matching send op
+ 	  // add cross edge
+ 	  AdjListNode *tail = &graph[j];
+@@ -225,6 +222,7 @@ void construct_graph() {
+     graph[graph_curr_insertion_pos].v = &rank_vertices[0][rank_collective_index[0]];
+     graph[graph_curr_insertion_pos].v->rank = 9999;
+     graph[graph_curr_insertion_pos].rank_index = collective_count;
++    graph[graph_curr_insertion_pos].next = NULL;
+     curr_collective_node = &graph[graph_curr_insertion_pos];
+     graph_curr_insertion_pos++;
+ 
+@@ -259,13 +257,15 @@ void construct_graph() {
+   int i;
+   for(i=0;i<num_ranks;i++) {
+     AdjListNode *tail = &graph[rank_fan_in_index[i]];
+-    int cost = rank_fan_in_cost[i];
+-    while(tail->next != NULL) {
+-      tail = (AdjListNode *)tail->next;
++    if(tail != NULL) {
++      int cost = rank_fan_in_cost[i];
++      while(tail->next != NULL) {
++	tail = (AdjListNode *)tail->next;
++      }
++      AdjListNode *node = create_node((VertexParcelable *)curr_collective_node->v, 
++				      cost, curr_collective_node->rank_index);
++      tail->next = (struct AdjListNode *)node;
+     }
+-    AdjListNode *node = create_node((VertexParcelable *)curr_collective_node->v, 
+-				    cost, curr_collective_node->rank_index);
+-    tail->next = (struct AdjListNode *)node;
+   }
+ }
+ 
+@@ -322,8 +322,17 @@ void dump_graph_to_dot() {
+     get_color_for_sub_graph(i, color);
+     sprintf(buf, "\t\tstyle=filled;\n\t\tcolor=%s;\n\t\tnode [style=filled, color=white];\n", color);
+     append_to_graph(buf);
+-    
++
+     int j;
++    for(j=0;j<rank_vertices_size[i];j++) {
++      if(!is_collective_op(&rank_vertices[i][j])) {
++	char mpi_op_str[50];
++	get_MPI_op_string(rank_vertices[i][j].mpi_op, mpi_op_str);
++	sprintf(buf, "\t\t%s_%d_%d;\n", mpi_op_str, i, j);
++	append_to_graph(buf);	
++      }
++    }
++
+     for(j=0;j<unique_num_nodes;j++) {
+       AdjListNode *curr = &graph[j];
+       AdjListNode *forward = (AdjListNode *)curr->next;
+@@ -436,7 +445,28 @@ void dump_graph_to_dot() {
+     AdjListNode *forward = (AdjListNode *)curr->next;
+     
+     if(curr->v->rank == 9999) {
+-      int first_edge = 1;
++      int max_edge_index = 0;
++      int max_edge_cost = 0;
++      AdjListNode *tmp = forward;
++      
++      int j=0;
++      while(forward != NULL) {
++	if(forward->v->rank == 9999) {
++	  int forward_index = get_node_index_in_graph(forward);
++	  if(is_on_critical_path(i, forward_index)) {
++	    if(max_edge_cost < forward->cost) {
++	      max_edge_cost = forward->cost;
++	      max_edge_index = j;
++	    }
++	  }
++	}
++
++	forward = (AdjListNode *)forward->next;
++	j++;
++      }
++
++      j=0;
++      forward = tmp;
+       while(forward != NULL) {
+ 	if(forward->v->rank == 9999) {
+ 	  char mpi_op_str_1[50];
+@@ -444,12 +474,11 @@ void dump_graph_to_dot() {
+ 	  get_MPI_op_string(curr->v->mpi_op, mpi_op_str_1);
+ 	  get_MPI_op_string(forward->v->mpi_op, mpi_op_str_2);
+ 	  int forward_index = get_node_index_in_graph(forward);
+-	  if(is_on_critical_path(i, forward_index) && first_edge) {
++	  if(j == max_edge_index) {
+ 	    sprintf(buf, "\t%s_%d_%d->%s_%d_%d [xlabel=\"%d\" color=red]\n", 
+ 		    mpi_op_str_1, 9999, curr->rank_index, 
+ 		    mpi_op_str_2, 9999, forward->rank_index, 
+ 		    forward->cost);
+-	    first_edge = 0;
+ 	  } else {
+ 	    sprintf(buf, "\t%s_%d_%d->%s_%d_%d [xlabel=\"%d\"]\n", 
+ 		    mpi_op_str_1, 9999, curr->rank_index, 
+@@ -460,6 +489,7 @@ void dump_graph_to_dot() {
+ 	}
+ 
+ 	forward = (AdjListNode *)forward->next;
++	j++;
+       }
+     }
+   }
+@@ -541,6 +571,7 @@ void dump_crit_path() {
+ 
+     // finding cost
+     AdjListNode *tail = (AdjListNode *)curr_node->next;
++    AdjListNode *max_collective_edge = NULL;
+     while(tail != NULL) {
+       if(are_nodes_equal(next_node, tail)) {
+ 	if((curr_node->v->mpi_op == MPI_op_Send || curr_node->v->mpi_op == MPI_op_Isend) && 
+@@ -554,6 +585,14 @@ void dump_crit_path() {
+ 	  get_MPI_op_string(tail->v->mpi_op, mpi_op_str);
+ 	  sprintf(buf, "%s %d\n", mpi_op_str, tail->v->rank);
+ 	  append_to_crit_path(buf);
++	} else if(is_collective_op(curr_node->v) && is_collective_op(next_node->v)) {
++	  // edge between two collectives
++	  // find the edge with max. cost
++	  if(max_collective_edge == NULL) {
++	    max_collective_edge = tail;
++	  } else if(max_collective_edge->cost < tail->cost) {
++	    max_collective_edge = tail;
++	  }
+ 	} else {
+ 	  // linear edge
+ 	  char buf[100];
+@@ -564,11 +603,26 @@ void dump_crit_path() {
+ 	  sprintf(buf, "%s %d\n", mpi_op_str, (tail->v->rank==9999?-1:tail->v->rank));
+ 	  append_to_crit_path(buf);
+ 	}
+-	break;
++	if(is_collective_op(curr_node->v) && is_collective_op(next_node->v)) {
++	  // do no break
++	} else {
++	  break;
++	}
+       }
+       tail = (AdjListNode *)tail->next;
+     }
+ 
++    if(max_collective_edge != NULL) {
++      // collective to collective direct edge
++      char buf[100];
++      sprintf(buf, "%d\n", max_collective_edge->cost);
++      append_to_crit_path(buf);
++      char mpi_op_str[50];
++      get_MPI_op_string(max_collective_edge->v->mpi_op, mpi_op_str);
++      sprintf(buf, "%s %d\n", mpi_op_str, max_collective_edge->v->rank);
++      append_to_crit_path(buf);
++    }
++
+     curr = next;
+     next = (PathElement *)next->next;
+   }

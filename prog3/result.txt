@@ -1,0 +1,488 @@
+Running test case: ./testcases/t9.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts10.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts11.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./testcases/ts12.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts13.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts14.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts15.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts16.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts17.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts18.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts19.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts1.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts20.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts21.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./testcases/ts22.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts23.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts24.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts25.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts26.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts27.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts28.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts29.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts2.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts30.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts31.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts32.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts33.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts34.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts35.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts36.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts37.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts38.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+Running test case: ./testcases/ts3.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./testcases/ts4.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./testcases/ts5.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./testcases/ts6.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./testcases/ts7.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./prog3_testcases/app_t10.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+Running test case: ./prog3_testcases/app_t13.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./prog3_testcases/app_t15.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+Running test case: ./prog3_testcases/app_t3.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success
+success
+success
+Running test case: ./prog3_testcases/app_t6.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+Rank 0 receives 88 from rank 2.
+Rank 0 receives 88 from rank 5.
+Rank 0 receives 88 from rank 7.
+success
+success
+success
+success
+Running test case: ./two_rank_testcases/app_t11.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+Running test case: ./two_rank_testcases/app_t14.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+Running test case: ./two_rank_testcases/app_t1.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+np = 2 me = 1
+np = 2 me = 1
+np = 2 me = 0
+np = 2 me = 0
+success rank = 1 tot_ranks = 2
+success rank = 0 tot_ranks = 2
+success rank = 1 tot_ranks = 2
+Running test case: ./two_rank_testcases/app_t2.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+Running test case: ./two_rank_testcases/app_t4.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+Running test case: ./two_rank_testcases/app_t7.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+np = 2 me = 1
+np = 2 me = 0
+np = 2 me = 1
+np = 2 me = 0
+success rank = 1 tot_ranks = 2
+success rank = 0 tot_ranks = 2
+Running test case: ./two_rank_testcases/app_t8.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+Running test case: ./two_rank_testcases/app_t9.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+Running test case: ./two_rank_testcases/t0.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+Running test case: ./two_rank_testcases/t13.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+Running test case: ./two_rank_testcases/t1.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+Running test case: ./two_rank_testcases/t2.c
+rm -f *.o *~
+rm app
+mpicc -o2 -o app app.c MPI_Wrapper.c
+success
+success
+success
+success

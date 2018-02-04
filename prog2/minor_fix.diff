@@ -1,0 +1,38 @@
+@@ -950,30 +913,40 @@ void find_critical_path() {
+          tail = (PathElement *)tail->next;
+ 
+          while(tail != NULL) {
++           if(neighbor_tail->next == NULL) {
++             PathElement *element = (PathElement *)malloc(1*sizeof(PathElement));
++             element->index = tail->index;
++             element->next = NULL;
++             neighbor_tail->next = (struct PathElement *)element;
++             neighbor_tail = element;
++           } else {
++             neighbor_tail = (PathElement *)neighbor_tail->next;
++             neighbor_tail->index = tail->index;
++           }
++           tail = (PathElement *)tail->next;
++         }
++
++         if(neighbor_tail->next == NULL) {
+            PathElement *element = (PathElement *)malloc(1*sizeof(PathElement));
+-           element->index = tail->index;
++           element->index = neighbor_index;
++           element->next = NULL;
+            neighbor_tail->next = (struct PathElement *)element;
+            neighbor_tail = element;
+-           tail = (PathElement *)tail->next;
++         } else {
++           neighbor_tail = (PathElement *)neighbor_tail->next;
++           neighbor_tail->index = neighbor_index;
++           neighbor_tail->next = NULL;
+          }
+-
+-         PathElement *element = (PathElement *)malloc(1*sizeof(PathElement));
+-         element->index = neighbor_index;
+-         neighbor_tail->next = (struct PathElement *)element;
+        }
+        neighbor = (AdjListNode *)neighbor->next;
+       }
+:
